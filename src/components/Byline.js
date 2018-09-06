@@ -1,0 +1,36 @@
+import React from "react";
+import PropTypes from "prop-types"; // ES6
+import { StyleSheet, View } from "react-native";
+import SmallText from "./SmallText";
+import { MUTED_COLOR } from "../styles/global";
+
+const Byline = ({ date, author, location }) => (
+  <View>
+    <View style={styles.row}>
+      <SmallText>{date.toLocaleDateString()}</SmallText>
+      <SmallText>{author}</SmallText>
+    </View>
+    {location ? (
+      <View style={styles.row}>
+        <SmallText style={styles.location}>{location}</SmallText>
+      </View>
+    ) : null}
+  </View>
+);
+
+Byline.PropTypes = {
+  date: PropTypes.instanceOf(Date).isRequired,
+  author: PropTypes.string.isRequired,
+  location: PropTypes.string
+};
+
+const styles = StyleSheet.create({
+  row: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 5
+  },
+  location: {
+    color: MUTED_COLOR
+  }
+});
